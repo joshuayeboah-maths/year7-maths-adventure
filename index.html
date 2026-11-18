@@ -30,9 +30,9 @@ button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:12px 16px
 
 <section class="panel" id="welcome">
  <h2>Welcome, mathematician!</h2>
- <p class="muted">Enter your name to begin. Choose an answer for each challenge, read the feedback, and use a hint when you need one. You can replay a mission to improve your score. Your teacher may ask you to show your working in your exercise book.</p>
- <div class="name-row"><input id="studentName" maxlength="40" placeholder="Enter your first and last name" aria-label="Student name"><button id="startBtn">Start adventure →</button></div>
- <p class="muted" style="font-size:.82rem;margin-bottom:0">This game runs in your browser. Your score is shown on this device; it is not automatically sent to your teacher.</p>
+ <p class="muted">Enter your school email address to begin. Choose an answer for each challenge, read the feedback, and use a hint when you need one. You can replay a mission to improve your score. Your teacher may ask you to show your working in your exercise book.</p>
+ <div class="name-row"><input id="studentName" type="email" maxlength="100" placeholder="Enter your school email address" aria-label="School email" required>
+ <p class="muted" style="font-size:.82rem;margin-bottom:0">This game runs in your browser. Your score will be automatically submitted to your teacher when you complete the adventure.</p>
 </section>
 
 <section class="panel hidden" id="dashboard">

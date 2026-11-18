@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+clicked the pecil<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -32,6 +32,7 @@ button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:12px 16px
  <h2>Welcome, mathematician!</h2>
  <p class="muted">Enter your school email address to begin. Choose an answer for each challenge, read the feedback, and use a hint when you need one. You can replay a mission to improve your score. Your teacher may ask you to show your working in your exercise book.</p>
  <div class="name-row"><input id="studentName" type="email" maxlength="100" placeholder="Enter your school email address" aria-label="School email" required>
+  <button id="startBtn" type="button">START ADVENTURE</button>
  <p class="muted" style="font-size:.82rem;margin-bottom:0">This game runs in your browser. Your score will be automatically submitted to your teacher when you complete the adventure.</p>
 </section>
 
@@ -138,6 +139,6 @@ function next(){if(currentQ<4){currentQ++;renderQuestion();}else{let m=missions[
 let missionCorrect={};
 const oldCheck=check;
 check=function(){if(selected===null||answered)return;let q=missions[currentMission].questions[currentQ];if(selected===q.c)missionCorrect[currentMission]=(missionCorrect[currentMission]||0)+1;oldCheck();};
-$("startBtn").onclick=start;$("studentName").addEventListener("keydown",e=>{if(e.key==="Enter")start();});$("hintBtn").onclick=hint;$("checkBtn").onclick=check;$("nextBtn").onclick=next;$("exitBtn").onclick=()=>{renderMap();show("dashboard");};$("playAgain").onclick=()=>{missionScores={};missionCorrect={};score=0;renderMap();show("dashboard");};$("backMap").onclick=()=>{renderMap();show("dashboard");};
+$("id="startBtn"").onclick=start;$("studentName").addEventListener("keydown",e=>{if(e.key==="Enter")start();});$("hintBtn").onclick=hint;$("checkBtn").onclick=check;$("nextBtn").onclick=next;$("exitBtn").onclick=()=>{renderMap();show("dashboard");};$("playAgain").onclick=()=>{missionScores={};missionCorrect={};score=0;renderMap();show("dashboard");};$("backMap").onclick=()=>{renderMap();show("dashboard");};
 </script>
 </body></html>

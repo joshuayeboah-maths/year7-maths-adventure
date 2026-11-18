@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Year 7 Maths Adventure</title>
+<style>
+:root{--ink:#18243b;--muted:#64748b;--bg:#f4f7fb;--card:#fff;--blue:#3157d5;--teal:#0f9b8e;--gold:#f2b84b;--red:#c2415d;--line:#e3e9f2}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(145deg,#edf3ff,#f8fbff 55%,#e9f8f5);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}
+.wrap{max-width:980px;margin:auto;padding:22px 16px 48px}.hero{background:linear-gradient(120deg,#172554,#3157d5 60%,#0f9b8e);color:white;padding:28px;border-radius:24px;box-shadow:0 14px 35px #1e3a8a25}
+.kicker{text-transform:uppercase;letter-spacing:.14em;font-size:.75rem;font-weight:800;opacity:.8}.hero h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.03;margin:10px 0}.hero p{max-width:680px;line-height:1.55;color:#e5edff}.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.pill{background:#ffffff20;border:1px solid #ffffff35;padding:8px 12px;border-radius:999px;font-weight:700;font-size:.9rem}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:18px;box-shadow:0 8px 24px #1e293b08}
+h2{margin:0 0 8px;font-size:1.35rem}.muted{color:var(--muted);line-height:1.5}.name-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.name-row input{flex:1;min-width:190px;padding:13px 14px;border:1px solid #cbd5e1;border-radius:12px;font:inherit}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:800;background:var(--blue);color:white;transition:.15s}button:hover{filter:brightness(1.06);transform:translateY(-1px)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}.secondary{background:#eaf0ff;color:#2445b7}.soft{background:#e7f7f4;color:#08796f}.danger{background:#fff0f2;color:#a52d49}
+.progress-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.bar{height:11px;background:#e9eef6;border-radius:99px;overflow:hidden;margin-top:12px}.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--teal));transition:width .3s}
+.missions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:16px}.mission{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff;display:flex;flex-direction:column;gap:8px}.mission .emoji{font-size:1.8rem}.mission h3{margin:0;font-size:1.02rem}.mission p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.4}.mission small{font-weight:800;color:#52627a}.mission.done{border-color:#83d4c8;background:#f1fcf9}.mission button{margin-top:auto}.locked{opacity:.55}
+.question-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.tag{font-size:.78rem;font-weight:900;letter-spacing:.04em;background:#edf2ff;color:#2949b6;border-radius:999px;padding:6px 10px}.qtext{font-size:1.25rem;font-weight:750;line-height:1.45;margin:20px 0}.answers{display:grid;gap:10px}.answer{width:100%;text-align:left;background:#f8fafc;border:1.5px solid #dce4ef;color:var(--ink);font-weight:650}.answer.selected{border-color:var(--blue);background:#eef2ff}.answer.correct{border-color:#36a98e;background:#e9faf5}.answer.wrong{border-color:#e28b9d;background:#fff0f3}.feedback{padding:13px 15px;border-radius:12px;margin-top:14px;line-height:1.5}.feedback.good{background:#e9faf5;color:#086b5d}.feedback.bad{background:#fff2f4;color:#96344b}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.hint{background:#fff9e9;border:1px solid #f4dfaa;color:#76531a;padding:12px;border-radius:12px;margin-top:12px;line-height:1.45}
+.hidden{display:none!important}.result{text-align:center}.big-score{font-size:3rem;font-weight:900;color:var(--blue);margin:8px}.badge-grid{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin:18px 0}.badge-item{background:#fff7df;border:1px solid #f2d68c;border-radius:999px;padding:9px 13px;font-weight:800}.footer{text-align:center;color:var(--muted);font-size:.82rem;margin:22px 0}
+@media(max-width:560px){.hero{padding:22px}.panel{padding:16px}.qtext{font-size:1.12rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="kicker">Cambridge-style skills • Year 7</div>
+ <h1>THE GREAT<br>MATHS ADVENTURE</h1>
+ <p>Six missions. Thirty challenges. One final boss. Build your maths power as you travel through Integer Island, Factor Factory, Roots Mountain, Algebra Lab and Decimal Dock.</p>
+ <div class="stats"><span class="pill">🎯 6 missions</span><span class="pill">🧠 30 questions</span><span class="pill">🏆 Earn badges</span><span class="pill">✏️ Show working in your book</span></div>
+</header>
+
+<section class="panel" id="welcome">
+ <h2>Welcome, mathematician!</h2>
+ <p class="muted">Enter your name to begin. Choose an answer for each challenge, read the feedback, and use a hint when you need one. You can replay a mission to improve your score. Your teacher may ask you to show your working in your exercise book.</p>
+ <div class="name-row"><input id="studentName" maxlength="40" placeholder="Enter your first and last name" aria-label="Student name"><button id="startBtn">Start adventure →</button></div>
+ <p class="muted" style="font-size:.82rem;margin-bottom:0">This game runs in your browser. Your score is shown on this device; it is not automatically sent to your teacher.</p>
+</section>
+
+<section class="panel hidden" id="dashboard">
+ <div class="progress-head"><div><h2 id="hello">Your adventure map</h2><div class="muted">Complete each mission to unlock the Final Boss.</div></div><div><strong id="totalScore">0</strong> points</div></div>
+ <div class="bar"><div id="progressFill"></div></div>
+ <div class="progress-head muted" style="margin-top:7px"><span id="progressText">0 of 6 missions complete</span><span id="percentText">0%</span></div>
+ <div class="missions" id="missionGrid"></div>
+</section>
+
+<section class="panel hidden" id="game">
+ <div class="question-top"><span class="tag" id="missionTag">MISSION</span><span class="muted" id="questionCount">Question 1 of 5</span></div>
+ <h2 id="missionTitle" style="margin-top:12px"></h2>
+ <div class="bar"><div id="questionFill"></div></div>
+ <div class="qtext" id="questionText"></div>
+ <div class="answers" id="answers"></div>
+ <div id="hintBox" class="hint hidden"></div>
+ <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+ <div class="actions">
+  <button class="secondary" id="hintBtn">💡 Show a hint</button>
+  <button id="checkBtn" disabled>Check answer</button>
+  <button class="hidden" id="nextBtn">Next challenge →</button>
+  <button class="secondary" id="exitBtn">Mission map</button>
+ </div>
+</section>
+
+<section class="panel hidden result" id="finish">
+ <div class="kicker" style="color:#3157d5">Adventure complete</div>
+ <h2 id="finishTitle">Outstanding work!</h2>
+ <div class="big-score" id="finalScore">0 / 30</div>
+ <p class="muted" id="finishMessage"></p>
+ <div class="badge-grid" id="badgeGrid"></div>
+ <button id="playAgain">Replay the adventure</button>
+ <button class="secondary" id="backMap">View mission map</button>
+ <p class="muted" style="font-size:.82rem">Take a screenshot of this result and submit it to Google Classroom if your teacher has asked for evidence. Also submit your written working if required.</p>
+</section>
+<div class="footer">THE GREAT MATHS ADVENTURE • Think carefully • Show your working • Keep improving</div>
+</div>
+<script>
+const missions = [
+ {id:"integers",name:"Integer Island",emoji:"🌋",desc:"Positive and negative numbers, ordering and operations.",questions:[
+  {q:"The temperature is −3°C. It rises by 8°C. What is the new temperature?",a:["−11°C","−5°C","5°C","11°C"],c:2,h:"Start at −3 and move 8 steps up the number line.",e:"−3 + 8 = 5, so the new temperature is 5°C."},
+  {q:"Work out: −7 + (−5).",a:["−12","−2","2","12"],c:0,h:"Adding a negative means moving further left on the number line.",e:"−7 + (−5) = −12."},
+  {q:"Work out: 6 − (−4).",a:["2","−10","10","−2"],c:2,h:"Subtracting a negative is the same as adding the positive.",e:"6 − (−4) = 6 + 4 = 10."},
+  {q:"Which list is in ascending order?",a:["−1, −4, 2, 5","−4, −1, 2, 5","5, 2, −1, −4","−4, 2, −1, 5"],c:1,h:"Ascending means smallest to largest. Negative numbers farther from zero are smaller.",e:"−4 < −1 < 2 < 5."},
+  {q:"A diver is 12 m below sea level. She rises 7 m, then descends 3 m. Where is she now?",a:["−22 m","−8 m","−2 m","2 m"],c:1,h:"Represent below sea level with negative numbers: −12 + 7 − 3.",e:"−12 + 7 − 3 = −8 m."}
+ ]},
+ {id:"factors",name:"Factor Factory",emoji:"🏭",desc:"Find highest common factors and lowest common multiples.",questions:[
+  {q:"Find the HCF of 18 and 24.",a:["3","6","9","12"],c:1,h:"List the factors of each number and find the greatest one they share.",e:"Common factors are 1, 2, 3 and 6. The HCF is 6."},
+  {q:"Find the LCM of 4 and 6.",a:["8","10","12","24"],c:2,h:"List multiples: 4, 8, 12… and 6, 12…",e:"The first common multiple is 12."},
+  {q:"Find the HCF of 30 and 45.",a:["5","10","15","30"],c:2,h:"Think of the greatest number that divides both 30 and 45 exactly.",e:"15 divides 30 and 45, and no larger common factor does."},
+  {q:"Find the LCM of 5 and 8.",a:["13","20","40","80"],c:2,h:"The first few multiples of 5 are 5, 10, 15, 20, 25, 30, 35, 40.",e:"40 is the smallest number in both times tables."},
+  {q:"Two bells ring every 6 minutes and every 8 minutes. They ring together now. In how many minutes will they next ring together?",a:["12","14","24","48"],c:2,h:"They next ring together after the LCM of 6 and 8 minutes.",e:"LCM(6, 8) = 24, so they ring together again in 24 minutes."}
+ ]},
+ {id:"roots",name:"Roots Mountain",emoji:"⛰️",desc:"Square numbers and square roots.",questions:[
+  {q:"What is √81?",a:["8","9","18","40.5"],c:1,h:"Which whole number multiplied by itself gives 81?",e:"9 × 9 = 81, so √81 = 9."},
+  {q:"Which of these is a square number?",a:["28","36","45","50"],c:1,h:"A square number is made by multiplying an integer by itself.",e:"36 = 6 × 6, so 36 is a square number."},
+  {q:"Work out √144.",a:["11","12","14","72"],c:1,h:"Find the number which has a square of 144.",e:"12 × 12 = 144."},
+  {q:"A square has an area of 49 cm². What is the length of one side?",a:["7 cm","14 cm","24.5 cm","49 cm"],c:0,h:"For a square, area = side × side. Find √49.",e:"The side length is √49 = 7 cm."},
+  {q:"Between which two consecutive whole numbers does √50 lie?",a:["5 and 6","6 and 7","7 and 8","8 and 9"],c:2,h:"Compare 50 with nearby square numbers 49 and 64.",e:"49 < 50 < 64, so 7 < √50 < 8."}
+ ]},
+ {id:"algebra",name:"Algebra Lab",emoji:"🧪",desc:"Simplify expressions, substitute and solve equations.",questions:[
+  {q:"Simplify: 3a + 5a.",a:["8","8a","15a","2a"],c:1,h:"Collect like terms by adding the coefficients of a.",e:"3a + 5a = 8a."},
+  {q:"Simplify: 7x − 2x + 4.",a:["5x + 4","9x","5x + 4x","5x − 4"],c:0,h:"Combine the x terms. The constant 4 stays separate.",e:"7x − 2x = 5x, so the expression is 5x + 4."},
+  {q:"Find the value of 2n + 3 when n = 4.",a:["8","10","11","14"],c:2,h:"Replace n with 4: 2 × 4 + 3.",e:"2(4) + 3 = 8 + 3 = 11."},
+  {q:"Solve: x + 7 = 15.",a:["7","8","9","22"],c:1,h:"Subtract 7 from both sides.",e:"x = 15 − 7 = 8."},
+  {q:"Expand: 3(y + 4).",a:["3y + 4","y + 12","3y + 12","7y"],c:2,h:"Multiply 3 by each term inside the bracket.",e:"3 × y + 3 × 4 = 3y + 12."}
+ ]},
+ {id:"decimals",name:"Decimal Dock",emoji:"🚢",desc:"Place value, comparing, multiplying and dividing decimals.",questions:[
+  {q:"Which number is greater?",a:["0.45","0.8","They are equal","Cannot tell"],c:1,h:"Write 0.8 as 0.80 so both numbers have two decimal places.",e:"0.80 > 0.45, so 0.8 is greater."},
+  {q:"Work out: 3.6 + 2.45.",a:["5.05","5.95","6.05","6.5"],c:2,h:"Line up the decimal points: 3.60 + 2.45.",e:"3.60 + 2.45 = 6.05."},
+  {q:"Work out: 7.2 ÷ 10.",a:["72","7.02","0.72","0.072"],c:2,h:"Dividing by 10 moves each digit one place to the right in place-value columns.",e:"7.2 ÷ 10 = 0.72."},
+  {q:"Round 4.768 to 2 decimal places.",a:["4.76","4.77","4.8","4.70"],c:1,h:"Look at the third decimal digit. It is 8, so round the second decimal digit up.",e:"4.768 rounds to 4.77 (the third decimal digit is 8)."},
+  {q:"A notebook costs 2.35. What is the cost of 4 notebooks?",a:["6.35","8.40","9.20","9.40"],c:3,h:"Calculate 2.35 × 4. You can do 2 × 4 and 0.35 × 4 separately.",e:"2.35 × 4 = 9.40."}
+ ]},
+ {id:"boss",name:"The Final Boss",emoji:"🐉",desc:"Mixed challenges from all five skill areas.",questions:[
+  {q:"Work out: −4 × 6.",a:["−24","−10","10","24"],c:0,h:"A negative multiplied by a positive gives a negative answer.",e:"4 × 6 = 24, and the sign is negative: −24."},
+  {q:"The HCF of two numbers is 4 and their LCM is 24. Which pair could be the numbers?",a:["4 and 24","6 and 8","8 and 12","12 and 24"],c:1,h:"Check both the greatest common factor and the lowest common multiple of each pair.",e:"For 6 and 8, HCF = 2, so this isn't correct. For 4 and 24, HCF = 4 and LCM = 24.",fix:0},
+  {q:"What is √169?",a:["11","12","13","14"],c:2,h:"13 × 13 = ?",e:"13 × 13 = 169, so √169 = 13."},
+  {q:"Simplify: 4p + 3 − p + 6.",a:["3p + 9","5p + 9","3p + 3","4p + 9"],c:0,h:"Collect p terms together and add the constants.",e:"4p − p = 3p and 3 + 6 = 9, giving 3p + 9."},
+  {q:"A rope is 12.5 m long. A piece of 3.75 m is cut off. How much remains?",a:["8.25 m","8.75 m","9.25 m","9.75 m"],c:1,h:"Calculate 12.50 − 3.75, lining up the decimal points.",e:"12.50 − 3.75 = 8.75 m."}
+ ]}
+];
+const $=id=>document.getElementById(id);
+let student="", currentMission=0, currentQ=0, selected=null, answered=false, score=0, missionScores={}, hintsUsed=0;
+function show(id){["welcome","dashboard","game","finish"].forEach(x=>$(x).classList.toggle("hidden",x!==id));}
+function start(){student=$("studentName").value.trim();if(!student){$("studentName").focus();alert("Please enter your name first.");return;}$("hello").textContent=`Your adventure map, ${student.split(" ")[0]}!`;missionScores={};score=0;renderMap();show("dashboard");}
+function renderMap(){
+ $("totalScore").textContent=score;
+ let done=Object.keys(missionScores).length, pct=Math.round(done/6*100);
+ $("progressFill").style.width=pct+"%";$("progressText").textContent=`${done} of 6 missions complete`;$("percentText").textContent=pct+"%";
+ $("missionGrid").innerHTML="";
+ missions.forEach((m,i)=>{let complete=missionScores[m.id]!==undefined;let card=document.createElement("div");card.className="mission"+(complete?" done":"");card.innerHTML=`<div class="emoji">${m.emoji}</div><h3>${m.name}</h3><p>${m.desc}</p><small>${complete?`✓ Completed • ${missionScores[m.id]}/5 correct`:"5 challenges • up to 5 points"}</small><button ${i===5&&done<5?"disabled":""}>${complete?"Play again":(i===5?"Enter final boss":"Start mission →")}</button>`;card.querySelector("button").onclick=()=>begin(i);$("missionGrid").appendChild(card);});
+ if(done===6){$("finishTitle").textContent="You conquered the Maths Adventure!";$("finalScore").textContent=`${score} / 30`;let msg=score>=26?"Exceptional mathematical thinking!":score>=21?"Excellent effort. Keep sharpening those skills.":score>=15?"Good progress. Review the feedback and try again.":"Every expert starts by practising. Revisit the missions and build your confidence."; $("finishMessage").textContent=`${student}, ${msg}`;$("badgeGrid").innerHTML=missions.filter(m=>missionScores[m.id]>=4).map(m=>`<span class="badge-item">${m.emoji} ${m.name} Master</span>`).join("")||'<span class="badge-item">🌱 Persistent Learner</span>';$("finish").classList.remove("hidden");}
+}
+function begin(i){currentMission=i;currentQ=0;selected=null;answered=false;hintsUsed=0;missionCorrect[i]=0;show("game");renderQuestion();}
+function renderQuestion(){let m=missions[currentMission],q=m.questions[currentQ];$("missionTag").textContent=m.emoji+" "+m.name.toUpperCase();$("missionTitle").textContent=m.name;$("questionCount").textContent=`Challenge ${currentQ+1} of 5`;$("questionFill").style.width=((currentQ)/5*100)+"%";$("questionText").textContent=q.q;$("answers").innerHTML="";q.a.forEach((a,i)=>{let b=document.createElement("button");b.className="answer";b.textContent=String.fromCharCode(65+i)+". "+a;b.onclick=()=>{if(answered)return;selected=i;document.querySelectorAll(".answer").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");$("checkBtn").disabled=false;};$("answers").appendChild(b);});$("hintBox").classList.add("hidden");$("feedback").classList.add("hidden");$("nextBtn").classList.add("hidden");$("checkBtn").classList.remove("hidden");$("checkBtn").disabled=true;$("hintBtn").disabled=false;answered=false;selected=null;}
+function hint(){let q=missions[currentMission].questions[currentQ];$("hintBox").textContent="Hint: "+q.h;$("hintBox").classList.remove("hidden");hintsUsed++;}
+function check(){if(selected===null||answered)return;answered=true;let q=missions[currentMission].questions[currentQ],correct=selected===q.c;let buttons=[...document.querySelectorAll(".answer")];buttons[q.c].classList.add("correct");if(!correct)buttons[selected].classList.add("wrong");let fb=$("feedback");fb.className="feedback "+(correct?"good":"bad");fb.textContent=(correct?"Correct! +1 point. ":"Not quite. ")+q.e;fb.classList.remove("hidden");$("checkBtn").classList.add("hidden");$("hintBtn").disabled=true;$("nextBtn").textContent=currentQ===4?"Complete mission ✓":"Next challenge →";$("nextBtn").classList.remove("hidden");}
+function next(){if(currentQ<4){currentQ++;renderQuestion();}else{let m=missions[currentMission];missionScores[m.id]=m.questions.reduce((n,q,i)=>n+(i<5?0:0),0); // score is tracked below per-question
+ let correctCount=missionCorrect[currentMission]||0;
+ if(missionScores[m.id]!==undefined) score-=missionScores[m.id];
+ missionScores[m.id]=correctCount; score+=correctCount;renderMap();if(Object.keys(missionScores).length===6)show("finish");else show("dashboard");}}
+let missionCorrect={};
+const oldCheck=check;
+check=function(){if(selected===null||answered)return;let q=missions[currentMission].questions[currentQ];if(selected===q.c)missionCorrect[currentMission]=(missionCorrect[currentMission]||0)+1;oldCheck();};
+$("startBtn").onclick=start;$("studentName").addEventListener("keydown",e=>{if(e.key==="Enter")start();});$("hintBtn").onclick=hint;$("checkBtn").onclick=check;$("nextBtn").onclick=next;$("exitBtn").onclick=()=>{renderMap();show("dashboard");};$("playAgain").onclick=()=>{missionScores={};missionCorrect={};score=0;renderMap();show("dashboard");};$("backMap").onclick=()=>{renderMap();show("dashboard");};
+</script>
+</body></html>

@@ -139,6 +139,6 @@ function next(){if(currentQ<4){currentQ++;renderQuestion();}else{let m=missions[
 let missionCorrect={};
 const oldCheck=check;
 check=function(){if(selected===null||answered)return;let q=missions[currentMission].questions[currentQ];if(selected===q.c)missionCorrect[currentMission]=(missionCorrect[currentMission]||0)+1;oldCheck();};
-$("id="startBtn"").onclick=start;$("studentName").addEventListener("keydown",e=>{if(e.key==="Enter")start();});$("hintBtn").onclick=hint;$("checkBtn").onclick=check;$("nextBtn").onclick=next;$("exitBtn").onclick=()=>{renderMap();show("dashboard");};$("playAgain").onclick=()=>{missionScores={};missionCorrect={};score=0;renderMap();show("dashboard");};$("backMap").onclick=()=>{renderMap();show("dashboard");};
+$("startBtn").onclick=start;$("studentName").addEventListener("keydown",e=>{if(e.key==="Enter")start();});$("hintBtn").onclick=hint;$("checkBtn").onclick=check;$("nextBtn").onclick=next;$("exitBtn").onclick=()=>{renderMap();show("dashboard");};$("playAgain").onclick=()=>{missionScores={};missionCorrect={};score=0;renderMap();show("dashboard");};$("backMap").onclick=()=>{renderMap();show("dashboard");};
 </script>
 </body></html>
